@@ -6,16 +6,15 @@
     </ul>
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h2 ng-bind="tmp.name"></h2>
+        <h2>{{ detailObj.name}}</h2>
       </div>
-
       <div class="panel-body">
-          <div><img src="img/{{tmp.img_lg}}" class="img-responsive" alt=""/></div>
-          <h4><b>主要原材料：</b><span>{{tmp.material}} </span></h4>
+          <div><img src="img/{{detailObj.img_lg}}" class="img-responsive" alt=""/></div>
+          <h4><b>主要原材料：</b><span>{{detailObj.material}} </span></h4>
           <h5 class="text-justify">
-            {{tmp.detail}}
+            {{detailObj.detail}}
           </h5>
-          <h6 class="text-danger"><b>￥{{price}}</b></h6>
+          <h6 class="text-danger"><b>￥{{detailObj.price}}</b></h6>
       </div>
 
       <div class="panel-footer text-right">

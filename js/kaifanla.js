@@ -4,7 +4,7 @@ var app=angular.module('myApp',['ng','ngRoute']);
 //2配置路由
 app.config(function($routeProvider){
   $routeProvider
-    .when('/detail',{ templateUrl:'tpl/detail.html',controller:'detailCtrl'})//用于无参数
+    .when('/detail',{ templateUrl:'tpl/detail.html'})//用于无参数
     .when('/detail/:obj',{templateUrl:'tpl/detail.html',controller:'detailCtrl'})//用于有参数de情况
 
     .when('/main',{templateUrl:'tpl/main.html',controller:'mainCtrl'})
@@ -28,9 +28,16 @@ app.controller('parentCtrl',['$scope','$location',function($scope,$location){
 
 //4分别为每个模块，建立控制器，便于数据操作
 
-app.controller('detailCtrl',['$scope','$routeParams',function($scope,$routeParams){
-  $scope.tmp=$routeParams.obj;
-   console.log($scope.tmp);
+app.controller('detailCtrl',['$scope','$routeParams','$http',function($scope,$routeParams,$http){
+  var tmp=parseInt($routeParams.obj);
+   //console.log($scope.tmp);
+    //alert(tmp);
+
+  $http.get(`data/dish_getbyid.php?did=${tmp}`).success(function(data){
+    $scope.detailObj=data;
+   // alert($scope.detailObj);
+   // console.log($scope.detailObj);
+  });
 
 }]);
 
@@ -38,6 +45,7 @@ app.controller('mainCtrl',['$scope','$http',function($scope,$http){
   $scope.mainGetData=function(begin,kWord){//用于在用户没有输入搜索框的加载数据
     $http.get(`data/dish_getbypage.php?start=${begin}&kw=${kWord}`).success(function(data){
       $scope.list=data.data;
+      console.log($scope.list);
       $scope.totalNum=parseInt(data.recordCount);//数据库中的总数据数
     });
   }
