@@ -9,7 +9,7 @@
   margin:0;
   padding:0;
 }
-.navbar-footer-menu>{
+.navbar-footer-menu>li{
   width:33%;
   display:inline-block;
   text-align: center;
