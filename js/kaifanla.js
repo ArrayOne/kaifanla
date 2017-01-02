@@ -5,7 +5,7 @@ var app=angular.module('myApp',['ng','ngRoute']);
 app.config(function($routeProvider){
   $routeProvider
     .when('/detail',{ templateUrl:'tpl/detail.html'})
-    .when('/main',{templateUrl:'tpl/main.html'})
+    .when('/main',{templateUrl:'tpl/main.html',controller:'mainCtrl'})
     .when('/myOrder',{templateUrl:'tpl/myOrder.html'})
     .when('/order',{templateUrl:'tpl/order.html'})
     .when('/start',{templateUrl:'tpl/start.html'})
@@ -28,10 +28,46 @@ app.controller('detailCtrl',['$scope',function(){
 
 }]);
 
-app.controller('mainCtrl',['$scope',function(){
+app.controller('mainCtrl',['$scope','$http',function($scope,$http){
+  $scope.mainGetData=function(begin,kWord){//用于在用户没有输入搜索框的加载数据
+    $http.get(`data/dish_getbypage.php?start=${begin}&kw=${kWord}`).success(function(data){
+      $scope.list=data.data;
+      $scope.totalNum=parseInt(data.recordCount);//数据库中的总数据数
+    });
+  }
+
+
+  $scope.begin=0;//起始的数据加载点从0 开始
+  $scope.keyWord='';//搜索关键字
+  //在打开main页面时候，自动加载五条数据到页面上
+   $scope.mainGetData($scope.begin,$scope.keyWord);
+
+  /*点击加载更多数据*/
+  $scope.loadMore=function(){
+    /*每点击一次就加载3个数据*/
+    $scope.begin+=3;
+    $scope.mainGetData($scope.begin,$scope.keyWord);
+  }
+
+
+  //==========当用户在输入框中输入关键子的是否对应查询数据显示在页面==========
+   //1:给回车键监听事件
+  document.onkeyup=function(e){
+     //当用户键入搜索字的时候，就获取关键字(如果没有就为空)
+    $scope.keyWord=document.querySelector('[name="searchKey"]').value;
+    e.preventDefault();
+    //alert(e.keyCode);
+    switch(e.keyCode){//输入管键字点击回车键，进行搜索
+      case 13: {$scope.begin=0;$scope.mainGetData($scope.begin,$scope.keyWord); }break;
+      default:
+    }
+  }
+
 
 
 }]);
+
+
 
 app.controller('myOrderCtrl',['$scope',function(){
 
