@@ -4,12 +4,17 @@ var app=angular.module('myApp',['ng','ngRoute']);
 //2配置路由
 app.config(function($routeProvider){
   $routeProvider
-    .when('/detail',{ templateUrl:'tpl/detail.html'})
+    .when('/detail',{ templateUrl:'tpl/detail.html',controller:'detailCtrl'})//用于无参数
+    .when('/detail/:obj',{templateUrl:'tpl/detail.html',controller:'detailCtrl'})//用于有参数de情况
+
     .when('/main',{templateUrl:'tpl/main.html',controller:'mainCtrl'})
+
     .when('/myOrder',{templateUrl:'tpl/myOrder.html'})
+
     .when('/order',{templateUrl:'tpl/order.html'})
+
     .when('/start',{templateUrl:'tpl/start.html'})
-    .otherwise({redirectTo:'/start'})
+
     .otherwise({redirectTo:'/start'});
 });
 
@@ -23,8 +28,9 @@ app.controller('parentCtrl',['$scope','$location',function($scope,$location){
 
 //4分别为每个模块，建立控制器，便于数据操作
 
-app.controller('detailCtrl',['$scope',function(){
-
+app.controller('detailCtrl',['$scope','$routeParams',function($scope,$routeParams){
+  $scope.tmp=$routeParams.obj;
+   console.log($scope.tmp);
 
 }]);
 
@@ -53,17 +59,19 @@ app.controller('mainCtrl',['$scope','$http',function($scope,$http){
   //==========当用户在输入框中输入关键子的是否对应查询数据显示在页面==========
    //1:给回车键监听事件
   document.onkeyup=function(e){
-     //当用户键入搜索字的时候，就获取关键字(如果没有就为空)
-    $scope.keyWord=document.querySelector('[name="searchKey"]').value;
+
     e.preventDefault();
     //alert(e.keyCode);
     switch(e.keyCode){//输入管键字点击回车键，进行搜索
-      case 13: {$scope.begin=0;$scope.mainGetData($scope.begin,$scope.keyWord); }break;
+      case 13: {
+        $scope.begin=0;
+        $scope.mainGetData($scope.begin,$scope.keyWord);
+        //当用户键入搜索字的时候，就获取关键字(如果没有就为空)
+        $scope.keyWord=document.querySelector('[name="searchKey"]').value;
+      }break;
       default:
     }
   }
-
-
 
 }]);
 

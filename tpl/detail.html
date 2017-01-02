@@ -6,21 +6,16 @@
     </ul>
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h2>【酸甜开胃虾子】</h2>
+        <h2 ng-bind="tmp.name"></h2>
       </div>
 
       <div class="panel-body">
-          <div><img src="img/p0281-l.jpg" class="img-responsive" alt=""/></div>
-          <h4><b>主要原材料：</b><span>明虾、番茄酱、白糖、白醋、葱、
-            姜、淀粉
-          </span></h4>
+          <div><img src="img/{{tmp.img_lg}}" class="img-responsive" alt=""/></div>
+          <h4><b>主要原材料：</b><span>{{tmp.material}} </span></h4>
           <h5 class="text-justify">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Au
-            t beatae consequuntur culpa cumque dicta earum eius est, inv
-            entore itaque magnam modi molestiae optio, placeat possimus
-            quasi tenetur vel voluptatum. Sequi!..........
+            {{tmp.detail}}
           </h5>
-          <h6 class="text-danger"><b>$36.00</b></h6>
+          <h6 class="text-danger"><b>￥{{price}}</b></h6>
       </div>
 
       <div class="panel-footer text-right">
