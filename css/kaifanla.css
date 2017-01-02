@@ -22,3 +22,8 @@ body{
   text-align: center;
 
 }
+
+/*设置tbody 中的内容居中对齐(myOrder)*/
+.myOrderTextStyle td{
+  vertical-align: middle !important;
+}
