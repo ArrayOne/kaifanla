@@ -1,1 +1,46 @@
- <h1> this is order page</h1>
+<div ng-include=" 'tpl/include/header.html '"></div>
+
+<div class="container">
+  <form  name="orderInfo">
+    <div class="form-group">
+      <label for="userName" class="control-label">联系人：</label>
+
+      <input type="text" id="userName" name="userName" ng-model="userName"
+             class="form-control" placeholder="请输入用户名" required/>
+
+      <span class="help-block" ng-show="orderInfo.userName.$dirty
+              && orderInfo.userName.$error.reqiured">请输入合法信息</span>
+    </div>
+
+    <div class="form-group">
+      <div class="radio-inline">
+        <label><input type="radio" name="sex" value="1"/>男</label>
+      </div>
+      <div class="radio-inline">
+        <label><input type="radio" name="sex" value="2"/>女</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="phone">联系电话</label>
+      <input type="text" id="phone" class="form-control" name="phone" ng-model="phone" placeholder="+13**"/>
+      <span class="help-block" ng-show="orderInfo.phone.$dirty
+                               && orderInfo.phone.$error.reqiured">只对大陆号码有效</span>
+    </div>
+
+    <div class="form-group">
+      <label for="address">送餐地址：</label>
+      <textarea id="address"    class="form-control" name="address"
+                placeholder="****区****楼****号"></textarea>
+      <span class="help-block" ng-show="orderInfo.address.$error.reqired
+                                     && orderInfo.address.$dirty ">不能为空</span>
+    </div>
+
+
+    <input type="button" class="btn btn-success btn-block" value="GO"
+           ng-disabled="!$orderInfo.$invalid" ng-click="jump('/myOrder')"/>
+
+  </form>
+</div>
+
+<div ng-include="'tpl/include/footer.html'"></div>
