@@ -1,5 +1,10 @@
+.start{
+  margin-top:60px;
+}
 
-
+body{
+  margin:80px 0 100px 0;
+}
 
 
 /*底部样式设计*/
@@ -9,9 +14,11 @@
   margin:0;
   padding:0;
 }
-.navbar-footer-menu>li{
-  width:33%;
+.navbar-footer-menu li{
+
   display:inline-block;
-  text-align: center;
+  width:30%;
   line-height: 60px;
+  text-align: center;
+
 }
