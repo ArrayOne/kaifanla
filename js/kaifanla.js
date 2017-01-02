@@ -17,7 +17,7 @@ app.config(function($routeProvider){
 app.controller('parentCtrl',['$scope','$location',function($scope,$location){
  /*定义一个jump方法，用于跳转页面*/
   $scope.jump=function(arg){
-    $location.href=arg;
+    $location.path(arg);
   }
 }]);
 

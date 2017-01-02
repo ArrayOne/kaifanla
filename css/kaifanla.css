@@ -1,0 +1,17 @@
+
+
+
+
+/*底部样式设计*/
+
+.navbar-footer-menu{
+ list-style:none;
+  margin:0;
+  padding:0;
+}
+.navbar-footer-menu>{
+  width:33%;
+  display:inline-block;
+  text-align: center;
+  line-height: 60px;
+}
