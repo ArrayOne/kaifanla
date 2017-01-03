@@ -16,12 +16,13 @@
 
   if($kw==null){//如果用户没有输入查询关键字
      $sql="SELECT * FROM kf_dish LIMIT $start,$count";
+     $sql2="SELECT COUNT(*) FROM kf_dish";
   }
   else{//如果用户输入查询关键字
     $sql="SELECT * FROM kf_dish WHERE name LIKE '%$kw%' or detail LIKE '%$kw%' LIMIT $start,$count";
+    $sql2="SELECT COUNT(*) FROM kf_dish WHERE name LIKE '%$kw%' or detail LIKE '%$kw%'";
   }
 
-  $sql2="SELECT COUNT(*) FROM kf_dish";
 
   $result=mysqli_query($conn,$sql);
 

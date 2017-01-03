@@ -27,10 +27,10 @@
 
     <div class="list-group">
       <span class="list-group-item text-center text-danger"
-            ng-repeat="(key,tmp) in list" ng-show="(tmp.did>=totalNum)">乜有没多数据了
+            ng-show="noMoreData">乜有没多数据了
       </span>
     </div>
-    <input class="btn btn-block btn-success" ng-click="loadMore()"  value="load more"/>
+    <input class="btn btn-block btn-success"  ng-hide="noMoreData" ng-click="loadMore()"  value="load more"/>
   </div>
 
 
