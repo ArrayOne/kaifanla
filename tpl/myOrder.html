@@ -15,7 +15,7 @@
       <tr ng-repeat="tmp in myOrderList">
        <td>{{tmp.did}}</td>
        <td>
-         <a href="#/detail">
+         <a href="#/detail/{{tmp.did}}">
            <img ng-src="img/{{tmp.img_sm}}" alt=""/>
          </a>
        </td>
