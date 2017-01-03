@@ -48,54 +48,36 @@ app.controller('mainCtrl',['$scope','$http',function($scope,$http){
     $http.get(`data/dish_getbypage.php?start=${begin}&kw=${kWord}`).success(function(data){
       $scope.list=data.data;
       console.log($scope.list);
-      $scope.totalNum=parseInt(data.recordCount);//数据库中的符合条件的数据数
-      alertInfo();//每次查询完之后就要进行判断,数据库中是否有足够多的数据
-     // console.log($scope.totalNum);
+      $scope.totalNum=parseInt(data.recordCount);//数据库中的总数据数
     });
   }
 
 
   $scope.begin=0;//起始的数据加载点从0 开始
   $scope.keyWord='';//搜索关键字
-  $scope.totalNum=0;//用于存储数据库中符合条件的数目
-  $scope.noMoreData=false;
   //在打开main页面时候，自动加载五条数据到页面上
    $scope.mainGetData($scope.begin,$scope.keyWord);
 
   /*点击加载更多数据*/
   $scope.loadMore=function(){
-    //alert(1);
     /*每点击一次就加载3个数据*/
     $scope.begin+=3;
-
     $scope.mainGetData($scope.begin,$scope.keyWord);
   }
 
 
-  //用于控制按钮，或者显示提示
-  function alertInfo(){
-    if($scope.begin+5>=$scope.totalNum){
-      $scope.noMoreData=true;
-    }else{
-      $scope.noMoreData=false;
-    }
-  }
-
   //==========当用户在输入框中输入关键子的是否对应查询数据显示在页面==========
    //1:给回车键监听事件
   document.onkeyup=function(e){
+
     e.preventDefault();
     //alert(e.keyCode);
     switch(e.keyCode){//输入管键字点击回车键，进行搜索
       case 13: {
-        $scope.begin=0;//每一次，点击键盘，就将起始查询位置置0
+        $scope.begin=0;
+        $scope.mainGetData($scope.begin,$scope.keyWord);
         //当用户键入搜索字的时候，就获取关键字(如果没有就为空)
         $scope.keyWord=document.querySelector('[name="searchKey"]').value;
-        if(!$scope.keyWord){
-          alert('请输入查询关键字！');
-        }
-        $scope.mainGetData($scope.begin,$scope.keyWord);
-       // alert($scope.noMoreData);
       }break;
       default:
     }
