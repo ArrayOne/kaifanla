@@ -9,7 +9,7 @@ app.config(function($routeProvider){
 
     .when('/main',{templateUrl:'tpl/main.html',controller:'mainCtrl'})
 
-    .when('/myOrder',{templateUrl:'tpl/myOrder.html'})
+    .when('/myOrder',{templateUrl:'tpl/myOrder.html',controller:'myOrderCtrl'})
 
     .when('/order',{templateUrl:'tpl/order.html',controller:'orderCtrl'})
     .when('/order/:id',{templateUrl:'tpl/order.html',controller:'orderCtrl'})
@@ -87,9 +87,13 @@ app.controller('mainCtrl',['$scope','$http',function($scope,$http){
 
 
 
-app.controller('myOrderCtrl',['$scope',function(){
 
-
+//============根据用户的手机号，进行个人订单的查询=============
+app.controller('myOrderCtrl',['$scope','$http',function($scope,$http){
+    $http.get(`data/order_getbyphone.php?userPhone=${sessionStorage['uPhone']}`).success(function(data){
+      console.log(data);
+      $scope.myOrderList=data;
+    });
 }]);
 
 //=====================添加订单==========================
@@ -102,8 +106,18 @@ app.controller('orderCtrl',['$scope','$http','$routeParams','$location','$timeou
     var uSex=1;
     var uAddress=$("#address").val();
     var did=$routeParams.did;
+
+    sessionStorage['uPhone']=uPhone;
+
+
    // alert(userData);
-    $scope.addOrder(uPhone,uName,uSex,uAddress,did);
+
+    if(uPhone&&uName&&uAddress&&uSex){//只有才用户完整了表单信息之后才能，进行点餐
+      $scope.addOrder(uPhone,uName,uSex,uAddress,did);
+    }else{
+      alert("请完整上述表单");
+    }
+
     //alert(userData);
   }
 

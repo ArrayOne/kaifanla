@@ -12,19 +12,16 @@
       </tr>
     </thead>
     <tbody class="myOrderTextStyle">
-
-      <tr>
-       <td>5</td>
+      <tr ng-repeat="tmp in myOrderList">
+       <td>{{tmp.did}}</td>
        <td>
          <a href="#/detail">
-           <img src="img/p0281.jpg" alt=""/>
+           <img src="img/{{tmp.img_sm}}" alt=""/>
          </a>
        </td>
-       <td>2015-12-09</td>
-       <td>小狗</td>
+       <td>{{tmp.order_time|date:'yyyy-MM-dd HH:mm:ss' }}</td>
+       <td>{{tmp.user_name}}</td>
       </tr>
-
-
     </tbody>
    </table>
 

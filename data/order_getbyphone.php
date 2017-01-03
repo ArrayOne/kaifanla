@@ -14,7 +14,7 @@ WHERE kf_order.phone='$userPhone' AND kf_order.oid=kf_dish.did";
 
  $result=mysqli_query($conn,$sql);
 
- $list=mysqli_fetch_assoc($result);
+ $list=mysqli_fetch_all($result,1);
 
  echo json_encode($list);
 ?>
