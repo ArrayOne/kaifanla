@@ -13,11 +13,11 @@
   $result=mysqli_query($conn,$sql);
 
   if($result){
-   $output['code']=1;
+   $output['code']=mysqli_insert_id($conn);
    $output['msg']="succ";
   }
   else{
-  $output['code']=2;
+
   $output['msg']="fail";
   }
 

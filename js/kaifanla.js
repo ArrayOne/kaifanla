@@ -27,9 +27,8 @@ app.controller('parentCtrl',['$scope','$location',function($scope,$location){
   }
 }]);
 
+
 //4分别为每个模块，建立控制器，便于数据操作
-
-
 
 //=======detail页面的数据操作根据id获取详情 dish_getbyid.php====================
 app.controller('detailCtrl',['$scope','$routeParams','$http',function($scope,$routeParams,$http){
@@ -93,7 +92,7 @@ app.controller('myOrderCtrl',['$scope',function(){
 
 }]);
 
-
+//=====================添加订单==========================
 app.controller('orderCtrl',['$scope','$http','$routeParams','$location','$timeout',function($scope,$http,$routeParams,$location,$timeout){
   $scope.wantOrder=function(){
     //alert(1);
@@ -112,7 +111,8 @@ app.controller('orderCtrl',['$scope','$http','$routeParams','$location','$timeou
     $http.get(`data/order_add.php?user_phone=${uPhone}&user_name=${uName}&user_sex=${uSex}&user_addr=${uAddress}&kfl_did=${did}`)
       .success(function(data){
        if(data.msg=='succ'){
-         alert("恭喜你，订单成功,点击三秒后返回主页面");
+
+         alert(`恭喜你，订单成功,你的订单编号是:${data.code},点击三秒后返回主页面`);
          $timeout(function(){$location.path('/main');},3000);
        //  $location.path('/main');
        }else{
@@ -122,6 +122,8 @@ app.controller('orderCtrl',['$scope','$http','$routeParams','$location','$timeou
   }
 
 }]);
+
+
 
 app.controller('startCtrl',['$scope',function(){
 

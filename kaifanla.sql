@@ -94,4 +94,4 @@ INSERT INTO kf_order(oid, phone,user_name,sex,order_time,addr,did) VALUES
 (NULL,'13501234567','婷婷',2,1445254959209,'大钟寺中鼎B座',2),
 (NULL,'13501234567','婷婷',2,1445354959209,'大钟寺中鼎B座',5);
 
-##SELECT * FROM kf_order;
+##SELECT * FROM kf_order ;
